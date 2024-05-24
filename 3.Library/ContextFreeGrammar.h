@@ -1,11 +1,11 @@
 #ifndef _CFG_
 #define _CFG_
 
-#include "LinkedListTemplate.h"
 #include "Prod.h"
 #include <fstream>
 #include <sstream>
 #include "StackTemplate.h"
+#include "LinkedListTemplate.h"
 #include "PredictiveParsingTable.h"
 /*Văn phạm G(Σ, Δ, s, p):
     + Σ: Tập hữu hạn các ký hiệu kết thúc (chữ thường)
@@ -40,19 +40,19 @@ public:
 
 void CFG::checkSyntaxUsePredict_View(string x){
     cout << *this << endl;
-    cout << "Xâu x: " << x << endl << endl;
+    cout << "Xau x: " << x << endl << endl;
     M m(this->p, this->delta, this->sigma);
-    cout << "Bảng tiên đoán M " << endl;
+    cout << "Bang tien doan M " << endl;
     m.PrintTable();
     cout << endl;
-    cout << "Phân tích Cú Pháp dùng Bảng Tiên Đoán" << endl;
+    cout << "Phan tich cu phap dung Bang Tien Doan" << endl;
     Stack<string> stack;
     stack.Push(this->s);                                            //Stack  = S$;
     LinkedList<string> buffer;                                  
     buffer = this->getToken(x);                                     //Buffer = x$;
     int i = 0, stt = 7, stac_k = 35, buffe_r = 35, hd = 25;
     printSpam("_", stt + stac_k + buffe_r + hd); cout << endl;
-    cout << setw(stt) << left << "STT " << setw(stac_k) << right << "STACK" << setw(buffe_r) << right << "BUFFER" << setw(hd) << right << "Hành Động" << endl;
+    cout << setw(stt) << left << "STT " << setw(stac_k) << right << "STACK" << setw(buffe_r) << right << "BUFFER" << setw(hd) << right << "Hanh Dong" << endl;
     printSpam("¯", stt + stac_k + buffe_r + hd); cout << endl;
     bool emptyBuffer = false;    
     while (true){                                                   //Lặp
@@ -60,13 +60,13 @@ void CFG::checkSyntaxUsePredict_View(string x){
         if (stack.isEmpty() && buffer.isEmpty()){                   //If (Stack là $) và (Buffer là $)
             cout << setw(stac_k) << right << stack.toStringTopDown() + "$";
             cout << setw(buffe_r) << right << buffer.toString() + "$";
-            cout << setw(hd+3) << right << "Chấp Nhận ! " << endl;
+            cout << setw(hd+3) << right << "Chap Nhan ! " << endl;
             return;                                                 //x đúng cú pháp, dừng vòng lặp
         }
         else if(this->belongToSigma(stack.Top()) && this->belongToSigma(buffer.getHead())){               //a ∈ Σ ở đỉnh stack và buffer
             cout << setw(stac_k) << right << stack.toStringTopDown() + "$";
             cout << setw(buffe_r) << right << buffer.toString() + "$";
-            cout << setw(hd-1) << right << "Đối sánh" << endl;
+            cout << setw(hd-1) << right << "Doi sanh" << endl;
             this->matching(stack, buffer);                    //xx
             emptyBuffer = buffer.isEmpty() ? true : false;
         }
@@ -80,23 +80,23 @@ void CFG::checkSyntaxUsePredict_View(string x){
             if (prod.alpha.isEmpty()){
                 cout << setw(stac_k) << right << stack.toStringTopDown() + "$";
                 cout << setw(buffe_r) << right << buffer.toString() + "$";
-                cout << setw(hd+9) << right << "Không chấp nhận !" << endl;
+                cout << setw(hd+9) << right << "Khong chap nhan !" << endl;
                 return;
             }else{
                 cout << setw(stac_k) << right << stack.toStringTopDown() + "$";
                 cout << setw(buffe_r) << right << buffer.toString() + "$";
-                cout << setw(hd) << right << "Triển khai "<< prod.toString() << endl;
+                cout << setw(hd) << right << "Trien khai "<< prod.toString() << endl;
                 this->deploy(stack, prod);                
             }
         }
         else{
             cout << setw(stac_k) << right << stack.toStringTopDown() + "$";
             cout << setw(buffe_r) << right << buffer.toString() + "$";
-            cout << setw(hd+9) << right << "Không chấp nhận !" << endl;
+            cout << setw(hd+9) << right << "Khong chap nhan !" << endl;
             return;
         }
         if (i > 100){
-            cout << "Chương trình lỗi ! " << endl; 
+            cout << "Chuong trinh loi ! " << endl; 
         }
         i++;    
     }
@@ -250,7 +250,7 @@ LinkedList<string> CFG::getToken(string s) const{
 }
 
 ostream &operator << (ostream &out, const CFG &x){
-    cout << "Văn Phạm G(Σ, Δ, s, p): " << endl;
+    cout << "Van Pham G(Σ, Δ, s, p): " << endl;
     cout << "Σ: {" << x.sigma << "}" << endl;
     cout << "Δ: {" << x.delta << "}" << endl;
     cout << "s: " << x.s << endl;

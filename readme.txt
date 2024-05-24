@@ -81,8 +81,7 @@ Cấu trúc chương trình:
         + Cấu trúc dữ liệu Prod
     + Cấu trúc dữ liệu M:
         + Đọc & Xuất M
-        + Cấu trúc dữ liệu RCP:
-            Cấu trúc dữ liệu Pair
+        + Cấu trúc dữ liệu RCP: -> Cấu trúc dữ liệu Pair
     + StackTemplate & M.Fisrt() & các phương thức cần thiết 
     + LinkedListTemplate + M.Follow() & các phương thức cần thiết
     + CFG.checkSyntaxUsePredict() & còn lại
